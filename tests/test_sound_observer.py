@@ -9,9 +9,9 @@ def test_sound_observer_play_sound(mocker):
     mocker.patch.object(sound_observer, 'play_random_sound', return_value=None)
 
     # Test when distance is below the threshold
-    sound_observer.update(25)
+    sound_observer.update(5)
     sound_observer.play_random_sound.assert_called_once()
 
     # Test when distance is above the threshold
-    sound_observer.update(35)
+    sound_observer.update(15)
     sound_observer.play_random_sound.assert_not_called()
