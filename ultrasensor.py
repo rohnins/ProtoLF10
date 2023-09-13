@@ -1,5 +1,3 @@
-#!/home/admin
-#init
 import RPi.GPIO as GPIO
 import time
 import random
