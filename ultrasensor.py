@@ -4,18 +4,20 @@ import RPi.GPIO as GPIO
 import time
 import random
 import os
+import pygame
 
 # Constants
 PIN_TRIGGER = 7
 PIN_ECHO = 11
-THRESHOLD_DISTANCE = 30.0 # Our determined distance for idle, any change in that distance gives a reaction
-SOUNDS_DIR = "path/on/our/rasp" # The path on our rasp, where all MP3 files are located
+# for the distance, everything below the number triggers a sound to happen. Make sure to adjust this number. I selected 10cm for testing.
+THRESHOLD_DISTANCE = 10.33 # Our determined distance for idle, any change in that distance gives a reaction
+SOUNDS_DIR = "/home/admin/Music" # The path on our rasp, where all MP3 files are located, we just select the music folder.
 
 # initialize GPIO
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(PIN_TRIGGER, GPIO.OUT)
 GPIO.setup(PIN_ECHO, GPIO.IN)
-
+pygame.mixer.init()
 
 # designpattern observer
 class Subject:
@@ -44,7 +46,10 @@ class SoundObserver:
         selected_sound = random.choice(self.sound_files)
         sound_path = os.path.join(SOUNDS_DIR, selected_sound)
         print(f"Playing sound: {selected_sound}")
-        # Replace this with code to play the selected sound
+        # now we use pygame to play the selected sound
+        
+        pygame.mixer.music.load(sound_path)
+        pygame.mixer.music.play()
  
  # Create instances of the Subject and SoundObserver
 sensor = Subject()
@@ -79,6 +84,7 @@ def read_distance():
 try:
     while True:
         distance = read_distance()
+        print ("Distance:",distance,"cm") #this is just for testing to measure the distance. If everything is settled, just comment this out.
         sensor.notify_observers(distance)
         time.sleep(1)
 
@@ -87,7 +93,17 @@ except KeyboardInterrupt:
 
 
 
-""" #old file, for reference.
+""" #old file, for reference. if we need to measure the exact distance in our container.
+
+#!/home/admin
+#init
+import RPi.GPIO as GPIO
+import time
+import random
+import os
+import pygame
+
+
 try:
       GPIO.setmode(GPIO.BOARD)
 
