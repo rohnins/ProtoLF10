@@ -5,6 +5,8 @@ import time
 import random
 import os
 import pygame
+import pytest-mock
+import pytest
 
 # Constants
 PIN_TRIGGER = 7
