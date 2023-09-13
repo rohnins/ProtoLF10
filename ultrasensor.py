@@ -1,4 +1,5 @@
 #!/home/admin
+#init
 import RPi.GPIO as GPIO
 import time
 
