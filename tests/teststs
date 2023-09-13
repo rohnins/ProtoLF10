@@ -1,4 +1,5 @@
 import pytest
+from unittest.mock import patch, MagicMock
 from ultrasensor import Subject, SoundObserver, read_distance  # Replace 'your_script_file' with the actual name of your script file
 
 # Mock GPIO functions for testing
@@ -18,13 +19,56 @@ class MockGPIO:
     @staticmethod
     def input(pin):
         pass
+    
+# Mock pygame.mixer for testing
+class MockPygameMixer:
+    @staticmethod
+    def init():
+        pass
+
+    @staticmethod
+    def music_load(sound_path):
+        pass
+
+    @staticmethod
+    def music_play():
+        pass
+    
 
 # Test the Subject and SoundObserver classes
 def test_sound_observer():
     observer = SoundObserver()
     observer.sound_files = ["Kid_Laugh-Mike_Koenig-1673908713.mp3", "Pew_Pew-DKnight556-1379997159.mp3"] 
-    observer.play_random_sound()
+    with patch.object(MockPygameMixer, 'music_play') as mock_play:
+        observer.play_random_sound()
+        mock_play.assert_called()
 
+# Test the Subject class with a mocked observer
+def test_subject_notify_observers():
+    subject = Subject()
+    observer = SoundObserver()
+
+    # Attach a mocked observer
+    with patch.object(observer, 'update') as mock_update:
+        subject.add_observer(observer)
+
+        # Simulate a scenario where the distance is less than THRESHOLD_DISTANCE
+        distance = 9.0  # Adjust this value as needed
+        subject.notify_observers(distance)
+
+        # Assert that the observer.update method was called
+        mock_update.assert_called_with(distance)
+
+        # Detach the observer
+        subject.remove_observer(observer)
+
+        # Simulate a scenario where the distance is greater than THRESHOLD_DISTANCE
+        distance = 11.0  # Adjust this value as needed
+        subject.notify_observers(distance)
+
+        # Assert that the observer.update method was not called
+        mock_update.assert_not_called()
+        
 def test_subject_add_remove_observer():
     subject = Subject()
     observer = SoundObserver()
@@ -32,41 +76,13 @@ def test_subject_add_remove_observer():
     assert len(subject.observers) == 1
     subject.remove_observer(observer)
     assert len(subject.observers) == 0
-
-# Test the ultrasonic sensor functions
+# Test the read_distance function with a timeout
 def test_read_distance_timeout():
     # Mock GPIO functions to simulate timeout
-    import RPi.GPIO as GPIO
-    GPIO.setmode = MockGPIO.setmode
-    GPIO.setup = MockGPIO.setup
-    GPIO.output = MockGPIO.output
-    GPIO.input = MockGPIO.input
+    with patch.object(MockGPIO, 'input', return_value=0):
+        distance = read_distance()
+        assert distance == -1
 
-    # Call read_distance and expect a timeout (-1)
-    distance = read_distance()
-    assert distance == -1
-
-# You can write more tests for read_distance with various distance scenarios
-
-# Integration test
-def test_integration():
-    subject = Subject()
-    observer = SoundObserver()
-    subject.add_observer(observer)
-
-    # Simulate a scenario where the distance is less than THRESHOLD_DISTANCE
-    distance = 9.0  # Adjust this value as needed
-    subject.notify_observers(distance)
-
-    # Assert that the observer played a sound
-    # You may need to mock pygame.mixer.music.load and pygame.mixer.music.play for this test
-    # and verify that they were called
-
-    # Simulate a scenario where the distance is greater than THRESHOLD_DISTANCE
-    distance = 11.0  # Adjust this value as needed
-    subject.notify_observers(distance)
-
-    # Assert that the observer did not play a sound
 
 if __name__ == '__main__':
     pytest.main()
