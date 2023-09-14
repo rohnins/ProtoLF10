@@ -1,3 +1,7 @@
+import unittest.mock as mock
+import pytest
+import ultrasensor
+
 def test_update():
     """
     Test the update method of the SoundObserver class
