@@ -2,3 +2,6 @@ RPi.GPIO==0.7.0
 pygame==2.0.1
 pytest==7.0.1
 pytest-mock==3.11.0
+libsd12-mixer==2.0
+python-docx
+wheel
