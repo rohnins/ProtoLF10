@@ -27,7 +27,7 @@ jobs:
         libsdl2-mixer-dev \
         portaudio19-dev \
         libportmidi-dev \
-        python-dev  # For RPi.GPIO
+      
 
     - name: Set up Python
       uses: actions/setup-python@v2
