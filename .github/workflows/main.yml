@@ -46,5 +46,10 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
+    - name: Compile and Run C Program
+      run: |
+        gcc -o audio audio.c -lSDL2 -lSDL2_mixer
+        ./audio
+
     - name: Run tests
       run: pytest tests
