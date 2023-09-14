@@ -13,22 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Update Package Cache
-      run: sudo apt-get update
-
-    - name: Install SDL2 Development Libraries
-      run: sudo apt-get install libsdl2-dev
-
-    - name: Install Additional Dependencies
-      run: |
-        sudo apt-get install -y \
-        libsdl2-ttf-dev \
-        libsdl2-image-dev \
-        libsdl2-mixer-dev \
-        portaudio19-dev \
-        libportmidi-dev \
-      
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
