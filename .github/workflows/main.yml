@@ -30,6 +30,9 @@ jobs:
     - name: Upgrade pip
       run: pip install --upgrade pip
 
+    - name: Install pygame
+      run: pip install https://github.com/pygame/pygame/releases/download/2.0.1/pygame-2.0.1-cp39-cp39-manylinux1_x86_64.whl
+
     - name: Install dependencies
       run: pip install -r requirements.txt
     
