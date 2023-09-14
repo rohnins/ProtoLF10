@@ -28,17 +28,6 @@ jobs:
           portaudio19-dev \
           libportmidi-dev
 
-    - name: Build and Install SDL2_mixer with CMake
-      run: |
-        git clone https://github.com/libsdl-org/SDL_mixer.git
-        mkdir SDL_mixer/build
-        cd SDL_mixer/build
-        cmake ..
-        make
-        sudo make install
-        cd ../../
-        rm -rf SDL_mixer
-
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -46,11 +35,9 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
-
-    - name: Compile and Run C Program
-      run: |
-        gcc -o audio audio.c -lSDL2 -lSDL2_mixer
-        ./audio
+    
+    - name: List installed packages
+      run: pip freeze
 
     - name: Run tests
       run: pytest tests
