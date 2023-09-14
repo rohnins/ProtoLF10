@@ -26,7 +26,8 @@ jobs:
           libsdl2-image-dev \
           libsdl2-mixer-dev \
           portaudio19-dev \
-          libportmidi-dev
+          libportmidi-dev \
+          libsdl2-mixer
     
     - name: Set up Python
       uses: actions/setup-python@v2
