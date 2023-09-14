@@ -15,7 +15,6 @@ jobs:
 
     - name: Update Package Cache
       run: sudo apt-get update
-
         
     - name: Install SDL2 Development Libraries
       run: sudo apt-get install libsdl2-dev
