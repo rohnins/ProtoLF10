@@ -1,5 +1,3 @@
-#!/home/admin
-#init
 import RPi.GPIO as GPIO
 import time
 import random
@@ -47,8 +45,8 @@ class SoundObserver:
         selected_sound = random.choice(self.sound_files)
         sound_path = os.path.join(SOUNDS_DIR, selected_sound)
         print(f"Playing sound: {selected_sound}")
-        # now we use pygame to play the selected sound
         
+        # now we use pygame to play the selected sound
         pygame.mixer.music.load(sound_path)
         pygame.mixer.music.play()
  
@@ -59,7 +57,7 @@ sensor.add_observer(sound_observer)
 
 # Functions for ultrasonic sensor
 def read_distance():
-      # Send a pulse to trigger the sensor
+    # Send a pulse to trigger the sensor
     GPIO.output(PIN_TRIGGER, True)
     time.sleep(0.00001)
     GPIO.output(PIN_TRIGGER, False)
@@ -77,7 +75,7 @@ def read_distance():
 
     pulse_duration = time.time() - echo_start_time
 
-    # Calculate distance in centimeters
+    # Calculation for the distance in centimeters
     distance = (pulse_duration * 34300) / 2
     return distance
 
