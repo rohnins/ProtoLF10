@@ -1,6 +1,5 @@
 import unittest.mock as mock
 import pytest
-import ultrasensor
 
 def test_addition():
     """
