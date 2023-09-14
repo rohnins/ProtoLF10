@@ -13,6 +13,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Update Package Cache
+      run: sudo apt-get update
+
+    - name: Install SDL2 Development Libraries
+      run: sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+    - name: Set SDL_CONFIG
+      run: echo "SDL_CONFIG=/usr/bin/sdl2-config" >> $GITHUB_ENV
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
