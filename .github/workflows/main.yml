@@ -16,8 +16,6 @@ jobs:
     - name: Update Package Cache
       run: sudo apt-get update
 
-<<<<<<< HEAD
-=======
         
     - name: Install SDL2 Development Libraries
       run: sudo apt-get install libsdl2-dev
@@ -31,7 +29,6 @@ jobs:
           portaudio19-dev \
           libportmidi-dev
     
->>>>>>> e10ccf5857d45b68027dc4a721d350b1719105de
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
