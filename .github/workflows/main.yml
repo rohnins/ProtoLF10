@@ -12,7 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    
+    - name: List Python files
+      run: ls *.py
     - name: Update Package Cache
       run: sudo apt-get update
 
@@ -41,3 +43,4 @@ jobs:
 
     - name: Run tests
       run: pytest tests
+      working-directory: 
