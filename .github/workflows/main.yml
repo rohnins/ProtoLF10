@@ -28,9 +28,15 @@ jobs:
           portaudio19-dev \
           libportmidi-dev \
     
-    - name: Install libsdl2-mixer via Snap
+    - name: Build and Install libsdl2-mixer
       run: |
-        sudo snap install libsdl2-mixer --edge
+        git clone https://github.com/libsdl-org/SDL_mixer.git
+        cd SDL_mixer
+        ./configure
+        make
+        sudo make install
+        cd ..
+        rm -rf SDL_mixer
     
     - name: Set up Python
       uses: actions/setup-python@v2
