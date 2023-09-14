@@ -3,8 +3,5 @@ pygame==2.0.1
 pytest==7.0.1
 pytest-mock==3.11.0
 libsd12-mixer==2.0
-<<<<<<< HEAD
 python-docx
 wheel
-=======
->>>>>>> ed900c4198902bdba4a502749e5b1b359c550392
