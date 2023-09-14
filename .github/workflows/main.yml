@@ -15,10 +15,10 @@ jobs:
 
     - name: Update Package Cache
       run: sudo apt-get update
-        
+
     - name: Install SDL2 Development Libraries
       run: sudo apt-get install libsdl2-dev
-    
+
     - name: Install Additional Dependencies
       run: |
         sudo apt-get install -y \
@@ -26,18 +26,19 @@ jobs:
           libsdl2-image-dev \
           libsdl2-mixer-dev \
           portaudio19-dev \
-          libportmidi-dev \
-    
-    - name: Build and Install libsdl2-mixer
+          libportmidi-dev
+
+    - name: Build and Install SDL2_mixer with CMake
       run: |
         git clone https://github.com/libsdl-org/SDL_mixer.git
-        cd SDL_mixer
-        ./configure
+        mkdir SDL_mixer/build
+        cd SDL_mixer/build
+        cmake ..
         make
         sudo make install
-        cd ..
+        cd ../../
         rm -rf SDL_mixer
-    
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
