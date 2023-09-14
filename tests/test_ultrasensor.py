@@ -1,5 +1,5 @@
 import pytest
-from ultrasensor import Subject, SoundObserver, read_distance  # Replace 'your_script_file' with the actual name of your script file
+from ultrasensor import Subject, SoundObserver, read_distance
 
 # Mock GPIO functions for testing
 class MockGPIO:
@@ -46,7 +46,7 @@ def test_read_distance_timeout():
     distance = read_distance()
     assert distance >= 0
 
-# You can write more tests for read_distance with various distance scenarios
+
 
 # Integration test
 def test_integration():
