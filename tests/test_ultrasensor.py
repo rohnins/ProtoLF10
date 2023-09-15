@@ -1,4 +1,4 @@
-import pytests
+import pytest
 import ultrasensor
 
 # Check if SOUNDS_DIR exists
