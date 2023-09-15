@@ -10,8 +10,3 @@ def test_distance_calculation():
     pulse_duration = 0.0001  # Example pulse duration for testing
     expected_distance = (pulse_duration * 34300) / 2
     assert read_distance(pulse_duration) == expected_distance, "Distance calculation is incorrect"
-
-# Function for ultrasonic sensor
-def read_distance(pulse_duration):
-    distance = (pulse_duration * 34300) / 2
-    return distance
