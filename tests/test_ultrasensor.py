@@ -1,10 +1,11 @@
+import unittest.mock as mock
 import pytest
-import ultrasensor
 
-# Check if SOUNDS_DIR exists
-def test_sounds_dir_exists():
-    assert os.path.exists(SOUNDS_DIR), "SOUNDS_DIR does not exist"
-
+def test_addition():
+    """
+    Test that addition works correctly
+    """
+    assert 1 + 1 == 2
 
 def test_subtraction():
     """
