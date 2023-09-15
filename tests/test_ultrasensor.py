@@ -1,26 +1,23 @@
-import unittest.mock as mock
 import pytest
+import ultrasensor
 
-def test_addition():
-    """
-    Test that addition works correctly
-    """
-    assert 1 + 1 == 2
+# Check if SOUNDS_DIR exists
+def test_sounds_dir_exists():
+    assert os.path.exists(SOUNDS_DIR), "SOUNDS_DIR does not exist"
 
-def test_subtraction():
-    """
-    Test that subtraction works correctly
-    """
-    assert 3 - 2 == 1
+# Check GPIO setup
+def test_gpio_setup():
+    assert GPIO.getmode() == GPIO.BOARD, "GPIO mode is not set to BOARD"
+    assert GPIO.gpio_function(PIN_TRIGGER) == GPIO.OUT, "PIN_TRIGGER is not set as an output pin"
+    assert GPIO.gpio_function(PIN_ECHO) == GPIO.IN, "PIN_ECHO is not set as an input pin"
 
-def test_multiplication():
-    """
-    Test that multiplication works correctly
-    """
-    assert 2 * 2 == 4
+# Check distance calculation
+def test_distance_calculation():
+    pulse_duration = 0.0001  # Example pulse duration for testing
+    expected_distance = (pulse_duration * 34300) / 2
+    assert read_distance(pulse_duration) == expected_distance, "Distance calculation is incorrect"
 
-def test_division():
-    """
-    Test that division works correctly
-    """
-    assert 4 / 2 == 2
+# Function for ultrasonic sensor
+def read_distance(pulse_duration):
+    distance = (pulse_duration * 34300) / 2
+    return distance
